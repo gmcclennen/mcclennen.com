@@ -1,0 +1,58 @@
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  background: #f6f4ef;
+  color: #2f2f2f;
+  line-height: 1.6;
+}
+
+.hero {
+  background: #23395d;
+  color: white;
+  padding: 70px 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 3rem;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  margin-top: 10px;
+}
+
+main {
+  max-width: 850px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.card {
+  background: white;
+  margin-bottom: 24px;
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
+}
+
+.card h2 {
+  margin-top: 0;
+  color: #23395d;
+}
+
+.highlight {
+  border-left: 8px solid #7c9a6d;
+}
+
+a {
+  color: #1d5f99;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #666;
+}
