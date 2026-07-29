@@ -67,6 +67,49 @@
     </section>
 
     <section class="card">
+      <h2>Photos</h2>
+      <p>
+        A few pictures of Bob and Karen through the years.
+      </p>
+
+      <div class="gallery">
+        <a class="gallery-item" href="images/1975-shanna-karen-dad.jpg">
+          <img src="images/1975-shanna-karen-dad.jpg" alt="Shanna, Karen, and Bob, 1975" loading="lazy" />
+        </a>
+        <a class="gallery-item" href="images/gordon-dori-1992.jpg">
+          <img src="images/gordon-dori-1992.jpg" alt="Gordon and Dori, circa 1992" loading="lazy" />
+        </a>
+        <a class="gallery-item" href="images/photo-2011-07-04.jpg">
+          <img src="images/photo-2011-07-04.jpg" alt="Family photo, July 2011" loading="lazy" />
+        </a>
+        <a class="gallery-item" href="images/IMG_0008.jpeg">
+          <img src="images/IMG_0008.jpeg" alt="Bob and Karen McClennen family photo" loading="lazy" />
+        </a>
+        <a class="gallery-item" href="images/IMG_0506.jpeg">
+          <img src="images/IMG_0506.jpeg" alt="Bob and Karen McClennen family photo" loading="lazy" />
+        </a>
+        <a class="gallery-item" href="images/IMG_0529.JPG">
+          <img src="images/IMG_0529.JPG" alt="Bob and Karen McClennen family photo" loading="lazy" />
+        </a>
+        <a class="gallery-item" href="images/IMG_0881.JPG">
+          <img src="images/IMG_0881.JPG" alt="Bob and Karen McClennen family photo" loading="lazy" />
+        </a>
+        <a class="gallery-item" href="images/IMG_1082.JPG">
+          <img src="images/IMG_1082.JPG" alt="Bob and Karen McClennen family photo" loading="lazy" />
+        </a>
+        <a class="gallery-item" href="images/Unknown.jpeg">
+          <img src="images/Unknown.jpeg" alt="Bob and Karen McClennen family photo" loading="lazy" />
+        </a>
+        <a class="gallery-item" href="images/Unknown-1.jpeg">
+          <img src="images/Unknown-1.jpeg" alt="Bob and Karen McClennen family photo" loading="lazy" />
+        </a>
+        <a class="gallery-item" href="images/Unknown-2.jpeg">
+          <img src="images/Unknown-2.jpeg" alt="Bob and Karen McClennen family photo" loading="lazy" />
+        </a>
+      </div>
+    </section>
+
+    <section class="card">
       <h2>Share a Memory</h2>
       <p>
         Former students, friends, neighbors, and family members are invited to
@@ -77,6 +120,31 @@
         Please email stories, photos, or notes to:
         <a href="mailto:memorial@mcclennen.com">memorial@mcclennen.com</a>
       </p>
+
+      <p>
+        Or leave a memory below for others to read.
+      </p>
+
+      <form id="memory-form" class="memory-form">
+        <label for="memory-name">Your name</label>
+        <input type="text" id="memory-name" name="name" maxlength="100" required />
+
+        <label for="memory-message">Your memory</label>
+        <textarea id="memory-message" name="message" rows="5" maxlength="3000" required></textarea>
+
+        <!-- Honeypot field: hidden from real visitors, bots tend to fill it in -->
+        <div class="hp-field" aria-hidden="true">
+          <label for="memory-website">Website</label>
+          <input type="text" id="memory-website" name="website" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <button type="submit">Post Memory</button>
+        <p id="memory-form-status" class="memory-form-status" role="status"></p>
+      </form>
+
+      <div id="memory-list" class="memory-list">
+        <p class="memory-list-loading">Loading memories&hellip;</p>
+      </div>
     </section>
 
     <section class="card">
@@ -93,6 +161,15 @@
   <footer>
     <p>&copy; 2026 McClennen Family</p>
   </footer>
+
+  <div id="lightbox" class="lightbox" hidden>
+    <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="gallery.js" defer></script>
+  <script src="memories.js" defer></script>
 
 </body>
 </html>
