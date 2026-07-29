@@ -235,3 +235,37 @@ footer {
   color: #777;
   font-style: italic;
 }
+
+/* Admin delete mode (?admin) */
+
+.memory-admin-select {
+  display: block;
+  font-size: 0.85rem;
+  color: #a33a3a;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+.memory-admin-select input {
+  margin-right: 6px;
+}
+
+.memory-admin-bar {
+  margin-top: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #e3e0d8;
+}
+
+.memory-admin-bar button {
+  padding: 10px 22px;
+  background: #a33a3a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.memory-admin-bar button:hover {
+  background: #822d2d;
+}

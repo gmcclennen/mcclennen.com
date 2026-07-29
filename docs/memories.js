@@ -11,6 +11,12 @@ const SUPABASE_ANON_KEY = "sb_publishable_oSZ_xUe6OELppmvK6UXjzA_fqvJZtv3";
   const statusEl = document.getElementById("memory-form-status");
   const listEl = document.getElementById("memory-list");
 
+  // Admin mode: add ?admin to the URL to show delete checkboxes.
+  // This is a UI convenience only, not real security — see notes in the
+  // repo. Meant to be temporary; remove the "public delete" policy in
+  // Supabase (and this flag) when it's no longer needed.
+  const isAdmin = new URLSearchParams(window.location.search).has("admin");
+
   const isConfigured =
     SUPABASE_URL !== "YOUR_SUPABASE_URL" &&
     SUPABASE_ANON_KEY !== "YOUR_SUPABASE_ANON_KEY" &&
@@ -40,6 +46,73 @@ const SUPABASE_ANON_KEY = "sb_publishable_oSZ_xUe6OELppmvK6UXjzA_fqvJZtv3";
     }
   }
 
+  function buildMemoryItem(row) {
+    const item = document.createElement("article");
+    item.className = "memory-item";
+    item.dataset.id = row.id;
+
+    if (isAdmin) {
+      const label = document.createElement("label");
+      label.className = "memory-admin-select";
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.className = "memory-select-checkbox";
+      checkbox.value = row.id;
+
+      label.appendChild(checkbox);
+      label.appendChild(document.createTextNode(" select for deletion"));
+      item.appendChild(label);
+    }
+
+    const meta = document.createElement("p");
+    meta.className = "memory-meta";
+    meta.textContent = `${row.name} — ${formatDate(row.created_at)}`;
+
+    const body = document.createElement("p");
+    body.className = "memory-body";
+    body.textContent = row.message;
+
+    item.appendChild(meta);
+    item.appendChild(body);
+    return item;
+  }
+
+  function buildAdminBar() {
+    const bar = document.createElement("div");
+    bar.className = "memory-admin-bar";
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = "Delete Selected";
+    btn.addEventListener("click", handleDeleteSelected);
+
+    bar.appendChild(btn);
+    return bar;
+  }
+
+  async function handleDeleteSelected() {
+    const checked = Array.from(
+      listEl.querySelectorAll(".memory-select-checkbox:checked")
+    ).map((cb) => cb.value);
+
+    if (checked.length === 0) return;
+
+    const confirmed = window.confirm(
+      `Delete ${checked.length} selected ${checked.length === 1 ? "memory" : "memories"}? This can't be undone.`
+    );
+    if (!confirmed) return;
+
+    const { error } = await client.from("memories").delete().in("id", checked);
+
+    if (error) {
+      window.alert("Something went wrong deleting: " + error.message);
+      return;
+    }
+
+    loadMemories();
+  }
+
   function renderMemories(rows) {
     listEl.innerHTML = "";
 
@@ -52,41 +125,19 @@ const SUPABASE_ANON_KEY = "sb_publishable_oSZ_xUe6OELppmvK6UXjzA_fqvJZtv3";
     }
 
     rows.forEach((row) => {
-      const item = document.createElement("article");
-      item.className = "memory-item";
-
-      const meta = document.createElement("p");
-      meta.className = "memory-meta";
-      meta.textContent = `${row.name} — ${formatDate(row.created_at)}`;
-
-      const body = document.createElement("p");
-      body.className = "memory-body";
-      body.textContent = row.message;
-
-      item.appendChild(meta);
-      item.appendChild(body);
-      listEl.appendChild(item);
+      listEl.appendChild(buildMemoryItem(row));
     });
+
+    if (isAdmin) {
+      listEl.appendChild(buildAdminBar());
+    }
   }
 
   function prependMemory(row) {
     if (listEl.querySelector(".memory-list-empty")) {
       listEl.innerHTML = "";
     }
-    const item = document.createElement("article");
-    item.className = "memory-item";
-
-    const meta = document.createElement("p");
-    meta.className = "memory-meta";
-    meta.textContent = `${row.name} — ${formatDate(row.created_at)}`;
-
-    const body = document.createElement("p");
-    body.className = "memory-body";
-    body.textContent = row.message;
-
-    item.appendChild(meta);
-    item.appendChild(body);
-    listEl.insertBefore(item, listEl.firstChild);
+    listEl.insertBefore(buildMemoryItem(row), listEl.firstChild);
   }
 
   async function loadMemories() {
@@ -152,7 +203,11 @@ const SUPABASE_ANON_KEY = "sb_publishable_oSZ_xUe6OELppmvK6UXjzA_fqvJZtv3";
 
       form.reset();
       statusEl.textContent = "Thank you for sharing a memory.";
-      prependMemory(data);
+      if (isAdmin) {
+        loadMemories();
+      } else {
+        prependMemory(data);
+      }
     });
   }
 
