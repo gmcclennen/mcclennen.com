@@ -3,10 +3,10 @@
 // SETUP: after creating the Supabase project and the `memories` table
 // (see the SQL Claude/Gordon worked out), paste the project URL and anon
 // public key below. Both values are meant to be public/client-side.
-const SUPABASE_URL = "https://dsvjhmmnfjunkwabrtzz.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_oSZ_xUe6OELppmvK6UXjzA_fqvJZtv3";
-
 (function () {
+  const SUPABASE_URL = "https://dsvjhmmnfjunkwabrtzz.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_oSZ_xUe6OELppmvK6UXjzA_fqvJZtv3";
+
   const form = document.getElementById("memory-form");
   const statusEl = document.getElementById("memory-form-status");
   const listEl = document.getElementById("memory-list");

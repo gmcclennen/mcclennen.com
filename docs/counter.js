@@ -2,10 +2,10 @@
 // row in `page_views`, then displays the total row count. Styled in
 // styles.css to match the page background, so it's invisible unless
 // selected/highlighted.
-const SUPABASE_URL = "https://dsvjhmmnfjunkwabrtzz.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_oSZ_xUe6OELppmvK6UXjzA_fqvJZtv3";
-
 (function () {
+  const SUPABASE_URL = "https://dsvjhmmnfjunkwabrtzz.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_oSZ_xUe6OELppmvK6UXjzA_fqvJZtv3";
+
   const counterEl = document.getElementById("visit-counter");
   if (!counterEl) return;
 
