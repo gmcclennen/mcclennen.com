@@ -76,6 +76,15 @@ main {
   color: #23395d;
 }
 
+.card ul {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.card ul li {
+  margin-bottom: 6px;
+}
+
 .highlight {
   border-left: 8px solid #7c9a6d;
 }
