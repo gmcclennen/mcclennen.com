@@ -7,7 +7,9 @@ body {
 }
 
 .hero {
-  background: #23395d;
+  background:
+    linear-gradient(rgba(20, 30, 40, 0.55), rgba(20, 30, 40, 0.55)),
+    url("images/beach-sunset.jpg") center/cover no-repeat;
   color: white;
   padding: 70px 20px;
   text-align: center;
