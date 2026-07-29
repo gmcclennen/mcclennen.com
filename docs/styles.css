@@ -24,6 +24,29 @@ body {
   margin-top: 10px;
 }
 
+.hero-photos {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.hero-photo {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 480px) {
+  .hero-photo {
+    width: 96px;
+    height: 96px;
+  }
+}
+
 main {
   max-width: 850px;
   margin: 40px auto;
