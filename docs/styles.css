@@ -49,6 +49,14 @@ body {
   }
 }
 
+.visit-counter {
+  margin: 10px 0 0;
+  text-align: center;
+  font-size: 14pt;
+  color: #eaf4fb; /* matches body background — invisible until selected */
+  user-select: text;
+}
+
 main {
   max-width: 850px;
   margin: 40px auto;
