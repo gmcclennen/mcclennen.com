@@ -103,10 +103,21 @@ const SUPABASE_ANON_KEY = "sb_publishable_oSZ_xUe6OELppmvK6UXjzA_fqvJZtv3";
     );
     if (!confirmed) return;
 
-    const { error } = await client.from("memories").delete().in("id", checked);
+    const { data, error } = await client
+      .from("memories")
+      .delete()
+      .in("id", checked)
+      .select();
 
     if (error) {
       window.alert("Something went wrong deleting: " + error.message);
+      return;
+    }
+
+    if (!data || data.length === 0) {
+      window.alert(
+        "Nothing was actually deleted. This usually means the delete permission hasn't been enabled in Supabase yet — run admin_mode_sql.sql in the SQL Editor, then try again."
+      );
       return;
     }
 
