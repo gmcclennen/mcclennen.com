@@ -146,6 +146,16 @@ footer {
 
 /* Memory wall */
 
+.memory-quip {
+  display: inline-block;
+  background: #fbf0d9;
+  border: 1px solid #e9d19b;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  color: #6b4f1d;
+}
+
 .memory-form {
   display: flex;
   flex-direction: column;
