@@ -128,6 +128,11 @@ footer {
   transform: scale(1.05);
 }
 
+.gallery-loading {
+  color: #777;
+  font-style: italic;
+}
+
 .lightbox {
   position: fixed;
   inset: 0;
